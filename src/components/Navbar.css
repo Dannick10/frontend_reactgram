@@ -1,0 +1,41 @@
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  border-bottom: 1px solid #363636;
+  padding: 0 1em 1em;
+}
+
+#search-form {
+  position: relative;
+  display: flex;
+  gap: 1em;
+  width: 20%;
+}
+
+
+#search-form input {
+  padding-left: 2.5em;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0;
+}
+
+#nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#nav-links a {
+  text-decoration: none;
+  color: white;
+}
+
+#nav-links li {
+  list-style: none;
+  cursor: pointer;
+
+}
