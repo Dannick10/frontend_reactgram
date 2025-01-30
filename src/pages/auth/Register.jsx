@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Auth.css'
 //components
 import { Link } from 'react-router-dom'
 
@@ -14,7 +14,7 @@ const handleSubmit = (e) => {
 
 const Register = () => {
   return (
-    <div>
+    <div id='register'>
       <h2>ReactGram</h2>
       <p className='subtitle'>Cadastre-se para ver as fotos dos seus amigos.</p>
       <form onSubmit={handleSubmit}>
