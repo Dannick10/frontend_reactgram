@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const { auth } = useAuth();
   const { user } = useSelector((state) => state.auth);
-  console.log(user)
+ 
   return (
     <nav id="navbar">
       <Link to="/">ReactGram</Link>
