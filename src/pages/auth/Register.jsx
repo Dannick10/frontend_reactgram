@@ -10,6 +10,8 @@ import { useState, useEffect } from "react";
 //redux
 import { register, reset } from "../../slices/authSlices";
 import { useDispatch, useSelector } from "react-redux";
+import { GrDisabledOutline } from "react-icons/gr";
+import Message from "../../components/Message";
 
 const Register = () => {
   const [name, SetName] = useState();
@@ -29,7 +31,7 @@ const Register = () => {
       password: password,
       confirmpassword: confirmPassowrd,
     };
-    console.log(user);
+
     dispatch(register(user));
   };
 
@@ -38,7 +40,7 @@ const Register = () => {
   }, [dispatch]);
 
   const { loading, error } = useSelector((state) => state.auth);
-
+  console.log({error})
   return (
     <div id="register">
       <h2>ReactGram</h2>
@@ -71,9 +73,12 @@ const Register = () => {
           value={confirmPassowrd}
           onChange={(e) => SetconfirmPassword(e.target.value)}
         />
-
+        {!loading &&
         <input type="submit" placeholder="Cadastrar" />
-      </form>
+        }
+        {loading && <input type="submit" value={"Aguarde..."} disabled/>}
+        {error && <Message msg={error} type="error" />}
+        </form>
       <p>
         Já tem conta ? <Link to={"/login"}>Ir para o login</Link>
       </p>
