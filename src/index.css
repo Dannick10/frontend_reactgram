@@ -40,7 +40,7 @@ input {
   color: #AAA;
   border: 3px solid #555;
   border-radius: 2px;
-  padding: 1px 8px;
+  padding: 6px 8px;
   outline: none;
   margin-bottom: .6em;
 }
@@ -50,7 +50,7 @@ input::placeholder {
 }
 
 .btn,
-buttom,
+button,
 input[type="submit"] {
   background-color: #0094f6;
   color: #fff;

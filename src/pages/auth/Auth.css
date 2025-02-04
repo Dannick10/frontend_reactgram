@@ -27,3 +27,7 @@
     padding-bottom: 1.5em;
     margin-bottom: 1.5em;
 }
+
+p a{
+    color: rgb(32, 115, 240);
+}

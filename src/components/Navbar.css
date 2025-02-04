@@ -7,15 +7,16 @@
   padding: 0 1em 1em;
 }
 
-#search-form {
+#search_form {
   position: relative;
   display: flex;
   gap: 1em;
   width: 20%;
+  margin: 0 10px;
 }
 
 
-#search-form input {
+#search_form input {
   padding-left: 2.5em;
   border: none;
   border-radius: 5px;
@@ -23,8 +24,15 @@
   margin: 0;
 }
 
+#search_form span {
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
 #nav-links {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   gap: 20px;
 }

@@ -19,24 +19,26 @@ const Navbar = () => {
   const { auth } = useAuth();
   const { user } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch()
-  const redirect = useNavigate()
+  const dispatch = useDispatch();
+  const redirect = useNavigate();
 
   const handleLogout = async () => {
-     await dispatch(logout()).unwrap()
-      dispatch(reset())
+    await dispatch(logout()).unwrap();
+    dispatch(reset());
 
-      redirect('/login')
-  }
- 
+    redirect("/login");
+  };
+  
   return (
     <nav id="navbar">
       <Link to="/">ReactGram</Link>
       <ul id="nav-links">
         {auth ? (
           <>
-            <form id="search-form">
+            <form id="search_form">
+              <span>
               <CiSearch />
+              </span>
               <input type="text" />
             </form>
             <li>
@@ -55,7 +57,7 @@ const Navbar = () => {
 
             <li>
               <NavLink to="/profile">
-              <BsFillPersonFill/>
+                <BsFillPersonFill />
               </NavLink>
             </li>
             <li>
