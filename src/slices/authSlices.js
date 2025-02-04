@@ -57,10 +57,11 @@ export const authSlice = createSlice({
             state.user = null;
             localStorage.removeItem("user")
         })
-        .addCase(logout.rejected, (state, action) => {
-            state.loading = null;
-            state.error = null;
+        .addCase(logout.fulfilled, (state, action) => {
             state.user = null;
+            state.loading = false;
+            state.sucess = false;
+            state.error = null;
         })
     }
 })

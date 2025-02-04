@@ -13,10 +13,21 @@ import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout, reset } from "../slices/authSlices";
 
 const Navbar = () => {
   const { auth } = useAuth();
   const { user } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch()
+  const redirect = useNavigate()
+
+  const handleLogout = async () => {
+     await dispatch(logout()).unwrap()
+      dispatch(reset())
+
+      redirect('/login')
+  }
  
   return (
     <nav id="navbar">
@@ -48,7 +59,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <span>Sair</span>
+              <span onClick={handleLogout}>Sair</span>
             </li>
           </>
         ) : (
