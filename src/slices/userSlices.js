@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { nullable } from "zod";
 
 const initialState = {
     user: {},
