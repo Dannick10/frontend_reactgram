@@ -31,21 +31,15 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
+      .addCase(profile.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(profile.fulfilled, (state, action) => {
         state.loading = false;
         state.sucess = true;
         state.error = null;
         state.user = action.payload;
-      })
-      .addCase(register.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-        state.user = null;
-        localStorage.removeItem("user");
       })
     } 
 })

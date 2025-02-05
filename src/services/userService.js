@@ -14,6 +14,6 @@ const profile = async (data, token) => {
   }
 };
 
-const userService = {};
+const userService = {profile};
 
 export default userService;
