@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetMessage, profile } from "../../slices/userSlices";
 
 import Message from "../../components/Message";
+import { uploads } from "../../utils/config";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -39,13 +40,32 @@ const EditProfile = () => {
     e.preventDefault();
   };
 
+  const handleFile = (e) => {
+    //image Preview
+    const image = e.target.files[0];
+
+    SetPreviewImage(image);
+
+    SetProfileImage(image);
+  };
+
   return (
     <div id="edit-profile">
       <h2>Edite seus dados</h2>
       <p className="subtitle">
         Adicione uma imagem de perfil e conte mais sobre voçê
       </p>
-
+      {(user.profileImage || previewImage) && (
+        <img
+          className="profile-image"
+          src={
+            previewImage
+              ? URL.createObjectURL(profileImage)
+              : `${uploads}/users/${user.profileImage}`
+          }
+          alt=""
+        />
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -62,7 +82,7 @@ const EditProfile = () => {
         />
         <label>
           <span>Imagem do perfil:</span>
-          <input type="file" name="" id="" />
+          <input type="file" onChange={handleFile} />
         </label>
         <label>
           <span>bio</span>
