@@ -10,6 +10,10 @@ const register = async (data) => {
       .then((res) => res.json())
       .catch((err) => err);
 
+      if(res.erros) {
+        return res
+      }
+
       if(res) {
         localStorage.setItem("user", JSON.stringify(res));
       }
@@ -31,7 +35,11 @@ const login = async (data) => {
     try {
       const res = await fetch(api + `/users/login`, config)
         .then((res) => res.json())
-        .catch((err) => err);
+        .catch((err) => {erros: err});
+
+        if(res.erros) {
+          return res
+        }
   
         if(res) {
           localStorage.setItem("user", JSON.stringify(res));
