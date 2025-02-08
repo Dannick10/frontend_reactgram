@@ -21,6 +21,7 @@ export const profile = createAsyncThunk(
     }
 )
 
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
