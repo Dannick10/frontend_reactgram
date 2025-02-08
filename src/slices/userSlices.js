@@ -53,22 +53,28 @@ export const userSlice = createSlice({
         state.loading = true;
         state.error = false;
       })
-      .addCase(updateProfile.fulfilled, (state, action) => {
+      .addCase(profile.fulfilled, (state, action) => {
         state.loading = false;
         state.sucess = true;
         state.error = null;
         state.user = action.payload;
-        state.message = "usuario atualizado com sucesso!"
       })
       .addCase(updateProfile.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(updateProfile.rejected, (state, action) => {
+      .addCase(updateProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.sucess = true;
-        state.error = aciton.payload;
-        state.user =null
+        state.error = null;
+        state.user = action.payload;
+        state.message = "Usuario atualizado com sucesso"
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.user = {};
+        localStorage.removeItem("user");
       })
     } 
 })
