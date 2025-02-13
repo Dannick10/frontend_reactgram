@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useRef } from "react";
+import "./profile.css"
 import { uploads } from "../../utils/config";
+
 
 import Message from "../../components/Message";
 import { Link, useParams } from "react-router-dom";
@@ -22,12 +23,19 @@ const Profile = () => {
     dispatch(getUserDetails(id));
   }, [dispatch, id]);
 
+  const newPhotoForm = useRef()
+  const editPhotoForm = useRef()
+
+  const submithandle = (e) => {
+    e.preventDefualt()
+  }
+
   if(loading) {
     return <p>Carregando...</p>
   }
 
   return <div id="profile">
-      <div className="profile-Header">
+      <div className="profile-header">
           {user.profileImage && (
             <img src={`${uploads}/users/${user.profileImage}`} alt={user.name} />
           )}
@@ -36,6 +44,24 @@ const Profile = () => {
             <p>{user.bio}</p>
           </div>
       </div>
+      {id === userAuth._id && (
+        <>
+          <div className="new-photo" ref={newPhotoForm}>
+              <h2>Compartilhe algum momento seu</h2>
+              <form onSubmit={submithandle}>
+                <label>
+                  <span>Titulo para a foto</span>
+                  <input type="text" placeholder="Insira um Titulo" />
+                </label>
+                <label>
+                    <span>Image:</span>
+                    <input type="file" />
+                </label>
+                <input type="submit" value="postar" />
+              </form>
+          </div>
+        </>
+      )}
     </div>;
 };
 
