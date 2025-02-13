@@ -3,23 +3,57 @@ import photoService from "../services/photoService";
 import { resetMessage } from "./userSlices";
 
 const initialState = {
-    photos: [],
-    photo: [],
-    error: false,
-    sucess: false,
-    loading: false, 
-    message: null
-}
+  photos: [],
+  photo: [],
+  error: false,
+  sucess: false,
+  loading: false,
+  message: null,
+};
+
+//publish user photo
+export const publishPhoto = createAsyncThunk(
+  "photo/publish",
+  async (photo, thunkAPI) => {
+    const token = thunkAPI.getState().auth.user.token;
+
+    const data = await photoService.publishPhoto(photo, token);
+
+    if (data.errors) {
+      return thunkAPI.rejectWithValue(data.erros[0]);
+    }
+  }
+);
 
 export const photoSlice = createSlice({
-    name: "photo",
-    initialState,
-    reducers: {
-        resetMessage:(state) => {
-            state.message = null;
-        }
-    }
-})
+  name: "photo",
+  initialState,
+  reducers: {
+    resetMessage: (state) => {
+      state.message = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(publishPhoto.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(publishPhoto.fulfilled, (state, action) => {
+        state.loading = false;
+        state.sucess = true;
+        state.error = null;
+        state.photo = action.payload;
+        state.photos.unshift(state.photo);
+        state.message = "Foto publicada com sucesso!";
+      })
+      .addCase(publishPhoto.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.photo = {};
+      });
+  },
+});
 
-export const {resetMessage} = photoSlice.actions
-export default photoSlice.reducer
+export const { resetMessage } = photoSlice.actions;
+export default photoSlice.reducer;
