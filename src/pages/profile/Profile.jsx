@@ -8,7 +8,7 @@ import { BsFillEyeFill, BsFillPenFill, BsXLg } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../slices/userSlices";
 import { object } from "zod";
-import { publishPhoto, reset } from "../../slices/photoSlice";
+import { getUserPhotos, publishPhoto, reset } from "../../slices/photoSlice";
 
 const Profile = () => {
   const { id } = useParams();
@@ -20,19 +20,19 @@ const Profile = () => {
   const {
     photos,
     loading: loadingPhoto,
-    message: MessagePhoto,  
+    message: MessagePhoto,
     error: errorPhoto,
   } = useSelector((state) => state.photo);
 
-  console.log(errorPhoto)
+  console.log(errorPhoto);
 
   const [title, SetTitle] = useState("");
   const [image, SetImage] = useState("");
 
   //load user data
   useEffect(() => {
-    console.log(id);
     dispatch(getUserDetails(id));
+    dispatch(getUserPhotos(id));
   }, [dispatch, id]);
 
   const newPhotoForm = useRef();
@@ -105,10 +105,24 @@ const Profile = () => {
             </form>
             {errorPhoto && <Message type={"error"} msg={errorPhoto} />}
             {MessagePhoto && <Message type={"sucess"} msg={MessagePhoto} />}
-          
           </div>
         </>
       )}
+      <div className="user-photos">
+        <h2>Fotos Publicadas:</h2>
+        <div className="photos-container">
+          {photos &&
+            photos.map((photo) => (
+              <div className="photo" key={photo._id}>
+                {photo.image && (
+                  <img src={`${uploads}/photos/${photo.image}`} />
+                )}
+          {id === userAuth._id ? "actions" : <Link className="btn" to={`/photos/${photo._id}`}> </Link>}
+              </div>
+            ))}
+            {photos.length === 0 && <p>Ainda não tem fotos publicadas.</p>}
+        </div>
+      </div>
     </div>
   );
 };
