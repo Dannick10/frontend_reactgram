@@ -112,7 +112,7 @@ const Profile = () => {
         <h2>Fotos Publicadas:</h2>
         <div className="photos-container">
           {photos &&
-            photos.map((photo) => (
+            photos?.map((photo) => (
               <div className="photo" key={photo._id}>
                 {photo.image && (
                   <img src={`${uploads}/photos/${photo.image}`} />
