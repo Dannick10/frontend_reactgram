@@ -7,8 +7,12 @@ import { Link, useParams } from "react-router-dom";
 import { BsFillEyeFill, BsFillPenFill, BsXLg } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../slices/userSlices";
-import { object } from "zod";
-import { getUserPhotos, publishPhoto, reset } from "../../slices/photoSlice";
+import {
+  deletePhoto,
+  getUserPhotos,
+  publishPhoto,
+  reset,
+} from "../../slices/photoSlice";
 
 const Profile = () => {
   const { id } = useParams();
@@ -67,6 +71,14 @@ const Profile = () => {
     SetImage(image);
   };
 
+  const handleDelete = (id) => {
+    dispatch(deletePhoto(id));
+
+    setTimeout(() => {
+      dispatch(reset());
+    }, 3000);
+  };
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -117,11 +129,23 @@ const Profile = () => {
                 {photo.image && (
                   <img src={`${uploads}/photos/${photo.image}`} />
                 )}
-          {id === userAuth._id ? "actions" : <Link className="btn" to={`/photos/${photo._id}`}> </Link>}
+                {id === userAuth._id ? (
+                  <div className="actions">
+                    <Link to={`/photos/${photo._id}`}>
+                      <BsFillEyeFill />
+                    </Link>
+                    <BsXLg onClick={() => handleDelete(photo._id)} />
+                  </div>
+                ) : (
+                  <Link className="btn" to={`/photos/${photo._id}`}>
+                    {" "}
+                  </Link>
+                )}
               </div>
             ))}
-            {photos.length === 0 && <p>Ainda não tem fotos publicadas.</p>}
+          {photos.length === 0 && <p>Ainda não tem fotos publicadas.</p>}
         </div>
+          {MessagePhoto && <Message msg={MessagePhoto} type="sucess" />}
       </div>
     </div>
   );

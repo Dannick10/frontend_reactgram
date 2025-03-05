@@ -40,7 +40,7 @@ export const getUserPhotos = createAsyncThunk(
 
 export const deletePhoto = createAsyncThunk(
   "photo/delete",
-  async(id, token) => {
+  async(id, thunkAPI) => {
 
     const token = thunkAPI.getState().auth.user.token;
 
