@@ -56,11 +56,26 @@ const updatePhoto = async (data, id, token) => {
   }
 };
 
+const getPhoto = async (id) => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "/photos/" + id, config)
+      .then((res) => ResizeObserver.json())
+      .catch((res) => res);
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const photoService = {
   publishPhoto,
   getUserphotos,
   deletePhoto,
-  updatePhoto
+  updatePhoto,
+  getPhoto
 };
 
 export default photoService;
