@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Profile from "./pages/profile/Profile";
+import Photo from "./pages/photo/photo";
 
 // user 
 
@@ -30,6 +31,7 @@ function App() {
         <div className="container">
         <Routes>
           <Route path="/" element={auth ?<Home /> : <Navigate to="/login"/>} />
+          <Route path="/photos/:id" element={auth ? <Photo/> : <Navigate to="/login"/>}/>
           <Route path="/editprofile" element={auth ?<EditProfile /> : <Navigate to="/login"/>} />
           <Route path="/users/:id" element={auth ?<Profile /> : <Navigate to="/"/>} />
           <Route path="/login" element={!auth ? <Login /> : <Navigate to="/"/>} />

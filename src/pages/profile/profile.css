@@ -47,6 +47,10 @@
     cursor: pointer;
 }
 
+.hide {
+    display: none;
+}
+
 .edit-photo {
     margin-bottom: 1em;
 }

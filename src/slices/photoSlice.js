@@ -137,9 +137,10 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.sucess = true;
         state.error = null;
+        state.message = "Messagem atualizada com sucesso"
 
         state.photos.map((photo) => {
-          if (photo._id === action.payload.action._id) {
+          if (photo._id === action.payload.id) {
             return (photo.title = action.payload.photo.title);
           }
 
